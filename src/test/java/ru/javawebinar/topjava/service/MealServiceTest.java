@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.service;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -60,6 +61,12 @@ public class MealServiceTest {
         SLF4JBridgeHandler.install();
     }
 
+
+    @Before
+    public void setUp() throws Exception {
+        service.evictCache();
+    }
+
     @AfterClass
     public static void printResult() {
         resultLog.info("\n---------------------------------" +
@@ -68,6 +75,7 @@ public class MealServiceTest {
                 results +
                 "---------------------------------\n");
     }
+
 
     @Autowired
     private MealService service;
