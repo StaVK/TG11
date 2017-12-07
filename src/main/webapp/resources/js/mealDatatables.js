@@ -1,27 +1,20 @@
-var ajaxUrl = "ajax/admin/users/";
+var ajaxUrl = "ajax/meals/";
 var datatableApi;
-
 
 // $(document).ready(function () {
 $(function () {
-    datatableApi = $("#datatable").DataTable({
+    datatableApi = $("#datatableMeal").DataTable({
         "paging": false,
         "info": true,
-        "columns": [
+        "aoColumns": [
             {
-                "data": "name"
+                "mData": "dateTime"
             },
             {
-                "data": "email"
+                "mData": "description"
             },
             {
-                "data": "roles"
-            },
-            {
-                "data": "enabled"
-            },
-            {
-                "data": "registered"
+                "mData": "calories"
             },
             {
                 "defaultContent": "Edit",
@@ -41,18 +34,20 @@ $(function () {
     });
     makeEditable();
 });
-function updateTable() {
-    $.get(ajaxUrl, function (data) {
+
+$("#filterForm").submit(function () {
+    filter();
+    return false;
+});
+function filter() {
+    $.get(ajaxUrl+"filter", function (data) {
         datatableApi.clear().rows.add(data).draw();
     });
 }
-function updateUser(id) {
-    $.post({
-        url: ajaxUrl+id,
-        success: function () {
-            updateTable();
-            successNoty("Update");
-        }
-    })
+function updateTable() {
+    filter();
 }
-
+function resetFilter() {
+    $("#filterForm").find(":input").val("");
+    return false;
+}

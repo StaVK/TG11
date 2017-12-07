@@ -34,3 +34,6 @@ header, footer {
 .glyphicon {
     cursor: pointer;
 }
+.disabledUser {
+    color: red;
+}

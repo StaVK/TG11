@@ -450,7 +450,7 @@
                 </con:request>
             </con:method>
         </con:resource>
-        <con:resource name="meal" path="/topjava/rest/profile/meals/100002" id="0845e038-cccd-474a-9d22-61d86a2d7a7f">
+        <con:resource name="meal" path="/topjava/ajax/meals" id="0845e038-cccd-474a-9d22-61d86a2d7a7f">
             <con:settings/>
             <con:parameters/>
             <con:method name="mealGet" id="e626de66-db50-46c2-998d-bc678628f063" method="GET">
@@ -531,7 +531,11 @@
                     <con:parameters/>
                 </con:request>
             </con:method>
-        </con:resource>
+        <con:method name="mealPost" id="ee9cf309-a57e-4032-a827-fd80698b6fe3" method="POST"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>datetime</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>description</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>calories</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:path xsi:nil="true"/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=utf-8</con:mediaType><con:status>401 400</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="75efd9c9-85f2-44f5-a40e-7851577ee05c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/topjava/rest/profile/meals/100002</con:originalUri><con:credentials><con:username>user@yandex.ru</con:username><con:password>password</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="description" value="rfv"/>
+  <con:entry key="calories" value="300"/>
+  <con:entry key="datetime" value="1234-11-11T11:11"/>
+</con:parameters></con:request></con:method></con:resource>
         
         <con:resource name="filter" path="/topjava/rest/profile/meals/filter" id="bdd36cb7-be1e-4806-b110-1a3001b46823">
             <con:settings/>
