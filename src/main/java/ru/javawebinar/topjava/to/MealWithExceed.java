@@ -2,9 +2,10 @@ package ru.javawebinar.topjava.to;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class MealWithExceed extends BaseTo {
+public class MealWithExceed extends BaseTo{
 
     private final LocalDateTime dateTime;
 
@@ -41,6 +42,7 @@ public class MealWithExceed extends BaseTo {
     public boolean isExceed() {
         return exceed;
     }
+
 
     @Override
     public String toString() {

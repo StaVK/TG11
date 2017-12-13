@@ -29,10 +29,16 @@ public class RootController {
         return "login";
     }
 
-    @GetMapping("/meals")
+    /*@GetMapping("/meals")
     public String meals(Model model) {
         model.addAttribute("meals",
                 MealsUtil.getWithExceeded(mealService.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
         return "meals";
+    }*/
+
+    @GetMapping("/meals")
+    public String meals() {
+        return "meals";
     }
+
 }
