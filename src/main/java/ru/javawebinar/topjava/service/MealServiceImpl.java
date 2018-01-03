@@ -51,6 +51,7 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal create(Meal meal, int userId) {
         Assert.notNull(meal, "meal must not be null");
+        Assert.isTrue(getBetweenDateTimes(meal.getDateTime(),meal.getDateTime(),userId).isEmpty(),"Meal with this date and time already exists!");
         return repository.save(meal, userId);
     }
 

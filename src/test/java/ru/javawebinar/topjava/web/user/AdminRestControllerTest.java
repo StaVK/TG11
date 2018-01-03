@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.javawebinar.topjava.TestUtil;
+import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.exception.ErrorType;
@@ -24,6 +25,24 @@ import static ru.javawebinar.topjava.UserTestData.*;
 public class AdminRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminRestController.REST_URL + '/';
+
+    @Test
+    public void testForDoubleEmail() throws Exception {//TODO Юзер передается на базу без пароля, поэтому ошибка валидации, а проверка на дубликат емайла не срабатывает
+        ResultActions action = mockMvc.perform(get(REST_URL + ADMIN_ID)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isOk());
+        User returned = MATCHER.fromJsonAction(action);
+
+        User newUser = new User(null, returned.getName(), returned.getEmail(), "password", 500, true, returned.getRegistered(), returned.getRoles());
+
+        mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+                .content(JsonUtil.writeValue(newUser)))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
+                .andDo(print());
+    }
 
     @Test
     public void testCreateInvalid() throws Exception {
@@ -136,6 +155,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
         MATCHER.assertEquals(NEW_USER, returned);
         MATCHER.assertListEquals(Arrays.asList(ADMIN, NEW_USER, USER), userService.getAll());
     }
+
 
     @Test
     public void testGetAll() throws Exception {

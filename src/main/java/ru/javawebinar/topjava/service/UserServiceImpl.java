@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
+        Assert.isNull(getByEmail(user.getEmail()),"User with this email already exists!");
         repository.save(prepareToSave(user));
     }
 
@@ -74,6 +75,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void update(UserTo userTo) {
         User user = updateFromTo(get(userTo.getId()), userTo);
+        Assert.isNull(getByEmail(user.getEmail()),"User with this email already exists!");
         repository.save(prepareToSave(user));
     }
 

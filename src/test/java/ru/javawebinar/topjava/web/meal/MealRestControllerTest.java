@@ -33,6 +33,21 @@ public class MealRestControllerTest extends AbstractControllerTest {
     private MealService service;
 
     @Test
+    public void testDoubleTimeCreate() throws Exception {
+        Meal created = MEAL1;
+        created.setUser(USER);
+        created.setId(null);
+        created.setCalories(800);
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(created))
+                .with(userHttpBasic(USER)))
+                .andExpect(status().is5xxServerError())
+                .andExpect(jsonPath("details").value("java.lang.IllegalArgumentException: Meal with this date and time already exists!"))
+                .andDo(print());
+    }
+
+    @Test
     public void testCreateInvalid() throws Exception {
         Meal expected = new Meal(null, null, "Test", 300);
         ResultActions action = mockMvc.perform(post(REST_URL)
